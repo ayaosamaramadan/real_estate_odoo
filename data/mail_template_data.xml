@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_payment_upcoming" model="mail.template">
+        <field name="name">Lease: Upcoming Expiration Reminder</field>
+        <field name="model_id" ref="model_real_estate_p_lease" />
+        <field name="subject">Lease Ending Soon: {{ object.property_id.name }}</field>
+        <field name="email_from">{{ (object.property_id.agent_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.property_id.agent_id.email or user.email }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear <t t-out="object.property_id.agent_id.name or 'Property Manager'" />,<br /><br />
+                    Lease <strong><t t-out="object.name" /></strong> for
+                    <strong><t t-out="object.property_id.name" /></strong> is scheduled to end on
+                    <strong><t t-out="object.end_date" /></strong>.<br /><br />
+                    Best regards,<br />
+                    Real Estate Management
+                </p>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True" />
+    </record>
+</odoo>

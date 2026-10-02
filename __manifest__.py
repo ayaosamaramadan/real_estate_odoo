@@ -20,12 +20,13 @@ Long description of module's purpose
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
         'report/report.xml',
         'report/prop_report_temp.xml',
         'report/lease_report_temp.xml',
