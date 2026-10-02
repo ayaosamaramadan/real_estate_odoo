@@ -52,6 +52,14 @@ class Property(models.Model):
             if record.agent_id:
                 record.write({'description': record.agent_id.name})
 
+    def action_export_excel(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/real_estate/property/excel_export/{self.id}',
+            'target': 'new',
+        }
+
     def inc_deposit(self):
         for record in self:
             record.deposit += 5000
