@@ -36,6 +36,11 @@
                     <button name="get_agent_name" string="Update Description to Agent Name" type="object"
                         class="oe_highlight" />
 
+                    <button name="inc_deposit" string="Increase Deposit by 5000" type="object"
+                        class="oe_highlight" />
+                    <button name="inc_bedroom" invisible="not available" string="Add Bedroom"
+                        type="object" class="oe_highlight" />
+
                 </header>
                 <sheet>
                     <group>
@@ -45,8 +50,11 @@
                         <group>
                             <field name="available" string="Available" />
                             <field name="price" string="Price" />
+                            <field name="deposit" string="Deposit" />
                             <field name="property_type" string="Property Type" />
                             <field name="agent_id" string="Agent" />
+                            <field name="bedrooms" string="Bedrooms" />
+
                         </group>
                     </group>
                 </sheet>

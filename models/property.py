@@ -9,6 +9,8 @@ class Property(models.Model):
     description = fields.Text(string="Description")
     available = fields.Boolean(string="Available", default=True)
     price = fields.Float(string="Price", default=0.0)
+    deposit = fields.Float(string="Deposit", default=0.0)
+    bedrooms = fields.Integer(string="Bedrooms", default=1)
     property_type = fields.Selection([
         ('house', 'House'),
         ('apartment', 'Apartment'),
@@ -44,3 +46,11 @@ class Property(models.Model):
         for record in self:
             if record.agent_id:
                 record.write({'description': record.agent_id.name})
+
+    def inc_deposit(self):
+        for record in self:
+            record.deposit += 5000
+
+    def inc_bedroom(self):
+        for record in self:
+            record.write({'bedrooms': record.bedrooms + 1})
