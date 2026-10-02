@@ -62,6 +62,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="radio_prop" string="Is Commercial?" widget="radio" options="{'horizontal': true}"/>
                             <field name="name" />
                         </group>
                         <group>
@@ -71,7 +72,6 @@
                             <field name="property_type" string="Property Type" />
                             <field name="agent_id" string="Agent" />
                             <field name="bedrooms" string="Bedrooms" />
-
                         </group>
                     </group>
                 </sheet>

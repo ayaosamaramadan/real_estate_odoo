@@ -7,10 +7,10 @@ class Lease(models.Model):
 
     name = fields.Char(readonly=True, copy=False)
     property_id = fields.Many2one(
-            'real_estate_p.property',
-            string='Property',
-            required=True,
-        )
+        'real_estate_p.property',
+        string='Property',
+        required=True,
+    )
 
     def lease_summary(self):
         self.ensure_one()
@@ -22,5 +22,15 @@ class Lease(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if not vals.get('name') or vals.get('name') == 'New':
-                vals['name'] = self.env['ir.sequence'].next_by_code('real_estate.lease') or '/'
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'real_estate.lease') or '/'
         return super().create(vals_list)
+
+    def _cron_auto_expire_leases(self):
+        """Scheduled action - expire leases whose end date has passed"""
+        today = fields.Date.today()
+        expired_leases = self.search([
+            ('end_date', '<', today),
+        ])
+        for lease in expired_leases:
+            lease.write({'state': 'expired'})

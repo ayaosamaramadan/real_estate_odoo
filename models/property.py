@@ -20,6 +20,10 @@ class Property(models.Model):
         ('shop', 'Shop'),
         ('villa', 'Villa')
     ], required=True)
+    radio_prop = fields.Selection([
+        ('yes', 'Yes'),
+        ('no', 'No'),
+    ], string='Is Commercial?', default='no')
 
     agent_id = fields.Many2one('res.users', string='Agent')
 
