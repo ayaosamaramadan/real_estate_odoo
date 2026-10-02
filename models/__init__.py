@@ -4,3 +4,4 @@ from . import models
 from . import property
 from . import lease
 from . import sales_order
+from . import tenant

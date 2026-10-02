@@ -25,6 +25,7 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'data/ir_sequence_data.xml',
         'data/mail_template_data.xml',
         'report/report.xml',
@@ -33,6 +34,7 @@ Long description of module's purpose
         'views/property.xml',
         'views/sales_order.xml',
         'views/lease.xml',
+        'views/tenant.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

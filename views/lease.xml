@@ -8,6 +8,7 @@
             <tree string="Lease">
                 <field name="name" />
                 <field name="property_id" />
+                <field name="tenant_id" />
             </tree>
         </field>
     </record>
@@ -27,6 +28,7 @@
                     <group>
                         <field name="name" />
                         <field name="property_id" />
+                        <field name="tenant_id" />
                         <field name="start_date" />
                         <field name="end_date" />
                     </group>

@@ -11,6 +11,11 @@ class Lease(models.Model):
         string='Property',
         required=True,
     )
+    tenant_id = fields.Many2one(
+        'real_estate.tenant',
+        string='Tenant',
+        ondelete='set null',
+    )
     start_date = fields.Date(string='Start Date', required=True)
     end_date = fields.Date(string='End Date', required=True)
 
