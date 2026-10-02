@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="available" string="Available" />
             </tree>
         </field>
     </record>
@@ -15,9 +16,16 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="set_available" string="Mark as Available" type="object"
+                        invisible="available" class="oe_highlight" />
+                    <button name="set_unavailable" string="Mark as Unavailable" type="object"
+                        invisible="not available" class="oe_highlight" />
+                </header>
                 <sheet>
                     <group>
                         <field name="name" />
+                        <field name="available" string="Available" />
                     </group>
                 </sheet>
             </form>
