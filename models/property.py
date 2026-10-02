@@ -8,7 +8,7 @@ class Property(models.Model):
     name = fields.Char(required=True)
     description = fields.Text(string="Description")
     available = fields.Boolean(string="Available", default=True)
-
+    price = fields.Float(string="Price", default=0.0)
     property_type = fields.Selection([
         ('house', 'House'),
         ('apartment', 'Apartment'),
@@ -33,3 +33,7 @@ class Property(models.Model):
     def update_description(self):
         for record in self:
             record.write({'description': 'This is a property desc'})
+
+    def mark_as_occupied(self):
+        for record in self:
+            record.write({'available': False, 'price': record.price + 2000})
