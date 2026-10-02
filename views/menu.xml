@@ -9,9 +9,21 @@
         action="real_estate_odoo.action_property"
         sequence="10" />
 
+    <menuitem id="menu_real_estate_tenants"
+        name="Tenants"
+        parent="menu_real_estate_root"
+        action="real_estate_odoo.action_tenant"
+        sequence="20" />
+
     <menuitem id="menu_real_estate_leases"
         name="Leases"
         parent="menu_real_estate_root"
         action="real_estate_odoo.action_lease"
-        sequence="20" />
+        sequence="30" />
+
+    <menuitem id="menu_real_estate_maintenance_requests"
+        name="Maintenance"
+        parent="menu_real_estate_root"
+        action="real_estate_odoo.action_maintenance_request"
+        sequence="40" />
 </odoo>
