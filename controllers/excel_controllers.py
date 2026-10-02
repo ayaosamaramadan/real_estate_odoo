@@ -72,6 +72,16 @@ class RealEstateController(http.Controller):
                 worksheet.write(row, 1, value or '', data_format)
             row += 1
 
+        row += 2
+        if property_obj.lease_ids:
+            worksheet.merge_range(row, 0, row, 1, 'LEASES', header_format)
+            row += 1
+            worksheet.write(row, 0, 'Lease Name', header_format)
+            row += 1
+            for lease in property_obj.lease_ids:
+                worksheet.write(row, 0, lease.name or '', data_format)
+                row += 1
+
         workbook.close()
         output.seek(0)
         filename = f'Property_{property_obj.name.replace(" ", "_")}.xlsx'
