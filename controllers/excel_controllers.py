@@ -72,19 +72,82 @@ class RealEstateController(http.Controller):
                 worksheet.write(row, 1, value or '', data_format)
             row += 1
 
-        row += 2
-        if property_obj.lease_ids:
-            worksheet.merge_range(row, 0, row, 1, 'LEASES', header_format)
-            row += 1
-            worksheet.write(row, 0, 'Lease Name', header_format)
-            row += 1
-            for lease in property_obj.lease_ids:
-                worksheet.write(row, 0, lease.name or '', data_format)
-                row += 1
-
         workbook.close()
         output.seek(0)
         filename = f'Property_{property_obj.name.replace(" ", "_")}.xlsx'
+
+        return request.make_response(
+            output.read(),
+            headers=[
+                ('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
+                ('Content-Disposition', content_disposition(filename))
+            ]
+        )
+
+    @http.route('/real_estate/lease/excel_export/<int:lease_id>', type='http', auth='user')
+    def lease_excel_export(self, lease_id, **kwargs):
+        lease_obj = request.env['real_estate_p.lease'].browse(lease_id)
+
+        if not lease_obj.exists():
+            return request.not_found()
+
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        worksheet = workbook.add_worksheet('Lease Details')
+
+        header_format = workbook.add_format({
+            'bold': True,
+            'bg_color': '#5B9BD5',
+            'font_color': 'white',
+            'border': 1,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
+
+        title_format = workbook.add_format({
+            'bold': True,
+            'font_size': 14,
+            'align': 'left'
+        })
+
+        label_format = workbook.add_format({
+            'bold': True,
+            'bg_color': '#F2F2F2',
+            'border': 1
+        })
+
+        data_format = workbook.add_format({'border': 1})
+        currency_format = workbook.add_format({'num_format': '$#,##0.00', 'border': 1})
+
+        worksheet.set_column('A:A', 28)
+        worksheet.set_column('B:B', 35)
+
+        row = 0
+        worksheet.merge_range(row, 0, row, 1, f'Lease Report: {lease_obj.name}', title_format)
+        row += 2
+
+        worksheet.merge_range(row, 0, row, 1, 'LEASE INFORMATION', header_format)
+        row += 1
+
+        lease_data = [
+            ('Lease Name', lease_obj.name),
+            ('Property', lease_obj.property_id.name or ''),
+            ('Property Type', dict(lease_obj.property_id._fields['property_type'].selection).get(lease_obj.property_id.property_type, '')),
+            ('Agent', lease_obj.property_id.agent_id.name or ''),
+            ('Price', lease_obj.property_id.price),
+        ]
+
+        for label, value in lease_data:
+            worksheet.write(row, 0, label, label_format)
+            if isinstance(value, float):
+                worksheet.write(row, 1, value, currency_format)
+            else:
+                worksheet.write(row, 1, value or '', data_format)
+            row += 1
+
+        workbook.close()
+        output.seek(0)
+        filename = f'Lease_{lease_obj.name.replace(" ", "_")}.xlsx'
 
         return request.make_response(
             output.read(),
