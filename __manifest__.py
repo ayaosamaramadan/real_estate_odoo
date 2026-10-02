@@ -20,7 +20,7 @@ Long description of module's purpose
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'sale'],
+    'depends': ['base', 'mail', 'sale', 'crm', 'portal'],
 
     # always loaded
     'data': [
@@ -28,6 +28,7 @@ Long description of module's purpose
         'security/security.xml',
         'data/ir_sequence_data.xml',
         'data/mail_template_data.xml',
+        'wizard/lease_maintenance_views.xml',
         'report/report.xml',
         'report/prop_report_temp.xml',
         'report/lease_report_temp.xml',
