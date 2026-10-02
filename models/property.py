@@ -25,6 +25,7 @@ class Property(models.Model):
 
     lease_ids = fields.One2many(
         'real_estate_p.lease', 'property_id', string='Leases')
+    lease_count = fields.Integer(compute='_compute_lease_count')
 
     def set_available(self):
         for record in self:
@@ -73,3 +74,15 @@ class Property(models.Model):
         vals['agent_id'] = self.env.user.id
         return super(Property, self).write(vals)
 
+    def view_leases(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id(
+            'real_estate_odoo.action_lease'
+        )
+        action['domain'] = [('property_id', '=', self.id)]
+        return action
+
+    @api.depends('lease_ids')
+    def _compute_lease_count(self):
+        for record in self:
+            record.lease_count = len(record.lease_ids)

@@ -44,6 +44,18 @@
 
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="view_leases"
+                            string="Leases"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o">
+                            <field name="lease_count"
+                                widget="statinfo"
+                                string="Leases" />
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name" />
