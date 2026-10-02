@@ -27,6 +27,7 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'report/report.xml',
         'report/prop_report_temp.xml',
+        'report/lease_report_temp.xml',
         'views/property.xml',
         'views/lease.xml',
         'views/menu.xml',

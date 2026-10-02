@@ -17,6 +17,10 @@
         <field name="model">real_estate_p.lease</field>
         <field name="arch" type="xml">
             <form string="Lease">
+                <header>
+                    <button name="lease_summary" string="Lease Summary" type="object"
+                        class="oe_highlight" />
+                </header>
                 <sheet>
                     <group>
                         <field name="name" />
