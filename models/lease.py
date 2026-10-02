@@ -20,6 +20,14 @@ class Lease(models.Model):
             'real_estate_odoo.action_report_lease_summary'
         ).report_action(self)
 
+    def action_export_excel(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/real_estate/lease/excel_export/{self.id}',
+            'target': 'new',
+        }
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
