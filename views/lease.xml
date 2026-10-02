@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_lease_tree" model="ir.ui.view">
+        <field name="name">lease.tree</field>
+        <field name="model">real_estate_p.lease</field>
+        <field name="arch" type="xml">
+            <tree string="Lease">
+                <field name="name" />
+                <field name="property_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lease_form" model="ir.ui.view">
+        <field name="name">lease.form</field>
+        <field name="model">real_estate_p.lease</field>
+        <field name="arch" type="xml">
+            <form string="Lease">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="property_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lease" model="ir.actions.act_window">
+        <field name="name">Leases</field>
+        <field name="res_model">real_estate_p.lease</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

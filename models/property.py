@@ -3,7 +3,7 @@ from odoo.exceptions import AccessError
 
 
 class Property(models.Model):
-    _name = "estate.property"
+    _name = "real_estate_p.property"
     _description = "Real Estate Property"
 
     name = fields.Char(required=True)
@@ -22,6 +22,9 @@ class Property(models.Model):
     ], required=True)
 
     agent_id = fields.Many2one('res.users', string='Agent')
+
+    lease_ids = fields.One2many(
+        'real_estate_p.lease', 'property_id', string='Leases')
 
     def set_available(self):
         for record in self:

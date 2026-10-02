@@ -2,7 +2,7 @@
 <odoo>
     <record id="view_property_tree" model="ir.ui.view">
         <field name="name">real.estate.property.tree</field>
-        <field name="model">estate.property</field>
+        <field name="model">real_estate_p.property</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -17,7 +17,7 @@
 
     <record id="view_property_form" model="ir.ui.view">
         <field name="name">real.estate.property.form</field>
-        <field name="model">estate.property</field>
+        <field name="model">real_estate_p.property</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -69,7 +69,7 @@
 
     <record id="action_property" model="ir.actions.act_window">
         <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
+        <field name="res_model">real_estate_p.property</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
