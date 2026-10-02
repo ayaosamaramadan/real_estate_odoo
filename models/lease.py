@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-
+from odoo.exceptions import ValidationError
 
 class Lease(models.Model):
     _name = "real_estate_p.lease"
@@ -11,6 +11,8 @@ class Lease(models.Model):
         string='Property',
         required=True,
     )
+    start_date = fields.Date(string='Start Date', required=True)
+    end_date = fields.Date(string='End Date', required=True)
 
     def lease_summary(self):
         self.ensure_one()
@@ -26,11 +28,13 @@ class Lease(models.Model):
                     'real_estate.lease') or '/'
         return super().create(vals_list)
 
-    def _cron_auto_expire_leases(self):
-        """Scheduled action - expire leases whose end date has passed"""
-        today = fields.Date.today()
-        expired_leases = self.search([
-            ('end_date', '<', today),
-        ])
-        for lease in expired_leases:
-            lease.write({'state': 'expired'})
+    @api.constrains('start_date', 'end_date')
+    def _check_dates(self):
+        for record in self:
+            if record.start_date and record.end_date:
+                if record.end_date <= record.start_date:
+                    raise ValidationError("End date must be after start date")
+
+    _sql_constraints = [
+        ('email_unique', 'UNIQUE(email)', 'Email must be unique! This email is already registered.'),
+    ]
