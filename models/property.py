@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import AccessError
 
 
 class Property(models.Model):
@@ -19,7 +20,7 @@ class Property(models.Model):
         ('shop', 'Shop'),
         ('villa', 'Villa')
     ], required=True)
-    
+
     agent_id = fields.Many2one('res.users', string='Agent')
 
     def set_available(self):
@@ -54,12 +55,18 @@ class Property(models.Model):
     def inc_bedroom(self):
         for record in self:
             record.write({'bedrooms': record.bedrooms + 1})
-            
-            
+
     def create(self, vals):
-            vals['agent_id'] = self.env.user.id
-            if 'available' not in vals:
-                vals['available'] = True
-            if 'bedrooms' not in vals:
-                vals['bedrooms'] = 1
-            return super(Property, self).create(vals)
+        vals['agent_id'] = self.env.user.id
+        if 'available' not in vals:
+            vals['available'] = True
+        if 'bedrooms' not in vals:
+            vals['bedrooms'] = 1
+        return super(Property, self).create(vals)
+
+    def write(self, vals):
+        if any(record.agent_id and record.agent_id != self.env.user for record in self):
+            raise AccessError('You can only modify your own properties.')
+        vals['agent_id'] = self.env.user.id
+        return super(Property, self).write(vals)
+
