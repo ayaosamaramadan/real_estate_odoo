@@ -20,6 +20,8 @@
                 <header>
                     <button name="lease_summary" string="Lease Summary" type="object"
                         class="oe_highlight" />
+                    <button name="action_export_excel" string="Download Excel Report" type="object"
+                        class="btn-primary" />
                 </header>
                 <sheet>
                     <group>

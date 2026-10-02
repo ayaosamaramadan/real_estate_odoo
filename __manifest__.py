@@ -25,6 +25,7 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'report/report.xml',
         'report/prop_report_temp.xml',
         'report/lease_report_temp.xml',
@@ -37,4 +38,3 @@ Long description of module's purpose
         'demo/demo.xml',
     ],
 }
-
