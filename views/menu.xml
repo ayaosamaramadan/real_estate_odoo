@@ -3,4 +3,9 @@
     <menuitem id="menu_real_estate_root"
         name="Real Estate"
         sequence="10" />
+    <menuitem id="menu_real_estate_properties"
+        name="Properties"
+        parent="menu_real_estate_root"
+        action="real_estate_odoo.action_property"
+        sequence="10" />
 </odoo>
