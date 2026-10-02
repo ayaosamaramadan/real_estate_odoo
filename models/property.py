@@ -86,3 +86,9 @@ class Property(models.Model):
     def _compute_lease_count(self):
         for record in self:
             record.lease_count = len(record.lease_ids)
+
+    def prop_summary(self):
+        self.ensure_one()
+        return self.env.ref(
+            'real_estate_odoo.action_report_property_summary'
+        ).report_action(self)

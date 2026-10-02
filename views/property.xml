@@ -42,6 +42,9 @@
                     <button name="inc_bedroom" invisible="not available" string="Add Bedroom"
                         type="object" class="oe_highlight" />
 
+                           <button name="prop_summary" string="Property Summary" type="object" 
+                        class="oe_highlight" />
+
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">

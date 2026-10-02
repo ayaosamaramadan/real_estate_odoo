@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_property_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2><span t-field="o.name" /></h2>
+                        <div><strong>Description:</strong> <span t-field="o.description" /></div>
+                        <div><strong>Available:</strong> <span t-field="o.available" /></div>
+                        <div>
+                            <strong>Price:</strong>
+                            <span t-field="o.price"
+                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}" />
+                        </div>
+                        <div>
+                            <strong>Deposit:</strong>
+                            <span t-field="o.deposit"
+                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}" />
+                        </div>
+                        <div><strong>Bedrooms:</strong> <span t-field="o.bedrooms" /></div>
+                        <div><strong>Property Type:</strong> <span t-field="o.property_type" /></div>
+                        <div><strong>Agent:</strong> <span t-field="o.agent_id" /></div>
+                        <div>
+                            <strong>Leases:</strong>
+                            <t t-foreach="o.lease_ids" t-as="lease">
+                                <div><span t-esc="lease.display_name" /></div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
