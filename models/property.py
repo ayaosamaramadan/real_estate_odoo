@@ -6,6 +6,7 @@ class Property(models.Model):
     _description = "Real Estate Property"
 
     name = fields.Char(required=True)
+    description = fields.Text(string="Description")
     available = fields.Boolean(string="Available", default=True)
 
     property_type = fields.Selection([
@@ -24,7 +25,11 @@ class Property(models.Model):
     def set_unavailable(self):
         for record in self:
             record.available = False
-            
+
     def change_property_type_to_office(self):
         for record in self:
             record.property_type = 'office'
+
+    def update_description(self):
+        for record in self:
+            record.write({'description': 'This is a property desc'})

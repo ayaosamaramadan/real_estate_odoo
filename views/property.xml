@@ -8,6 +8,7 @@
                 <field name="name" />
                 <field name="available" string="Available" />
                 <field name="property_type" string="Property Type" />
+                <field name="description" string="Description" />
             </tree>
         </field>
     </record>
@@ -22,19 +23,29 @@
                         invisible="available" class="oe_highlight" />
                     <button name="set_unavailable" string="Mark as Unavailable" type="object"
                         invisible="not available" class="oe_highlight" />
-                        <button name='change_property_type_to_office' 
+                    <button name='change_property_type_to_office'
                         string='change prop type to office'
                         type='object'
+                    />
+                    <button name='update_description' string='update description' type='object' />
 
-                        />
                 </header>
                 <sheet>
                     <group>
-                        <field name="name" />
-                        <field name="available" string="Available" />
-                        <field name="property_type" string="Property Type" />
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="available" string="Available" />
+                            <field name="property_type" string="Property Type" />
+                        </group>
                     </group>
                 </sheet>
+                <notebook>
+                    <page string="Description">
+                        <field name="description" />
+                    </page>
+                </notebook>
             </form>
         </field>
     </record>
