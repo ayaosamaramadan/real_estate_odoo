@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="sale_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.real.estate</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Partner Name</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="property_type" />
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="%(real_estate_odoo.action_property)d" type="action"
+                    context="{'default_name': partner_id.name}"
+                    string="Open Property" class="btn-primary" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

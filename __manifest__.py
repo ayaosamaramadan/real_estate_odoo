@@ -20,7 +20,7 @@ Long description of module's purpose
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'sale'],
 
     # always loaded
     'data': [
@@ -31,6 +31,7 @@ Long description of module's purpose
         'report/prop_report_temp.xml',
         'report/lease_report_temp.xml',
         'views/property.xml',
+        'views/sales_order.xml',
         'views/lease.xml',
         'views/menu.xml',
     ],
