@@ -54,3 +54,12 @@ class Property(models.Model):
     def inc_bedroom(self):
         for record in self:
             record.write({'bedrooms': record.bedrooms + 1})
+            
+            
+    def create(self, vals):
+            vals['agent_id'] = self.env.user.id
+            if 'available' not in vals:
+                vals['available'] = True
+            if 'bedrooms' not in vals:
+                vals['bedrooms'] = 1
+            return super(Property, self).create(vals)
