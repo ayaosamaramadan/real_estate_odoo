@@ -10,6 +10,7 @@
                 <field name="available" string="Available" />
                 <field name="property_type" string="Property Type" />
                 <field name="description" string="Description" />
+                <field name="agent_id" string="Agent" />
             </tree>
         </field>
     </record>
@@ -32,6 +33,9 @@
                     <button name="mark_as_occupied" string="Mark as Occupied" type="object"
                         invisible="not available" class="oe_highlight" />
 
+                    <button name="get_agent_name" string="Update Description to Agent Name" type="object"
+                        class="oe_highlight" />
+
                 </header>
                 <sheet>
                     <group>
@@ -42,6 +46,7 @@
                             <field name="available" string="Available" />
                             <field name="price" string="Price" />
                             <field name="property_type" string="Property Type" />
+                            <field name="agent_id" string="Agent" />
                         </group>
                     </group>
                 </sheet>

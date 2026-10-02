@@ -17,6 +17,8 @@ class Property(models.Model):
         ('shop', 'Shop'),
         ('villa', 'Villa')
     ], required=True)
+    
+    agent_id = fields.Many2one('res.users', string='Agent')
 
     def set_available(self):
         for record in self:
@@ -37,3 +39,8 @@ class Property(models.Model):
     def mark_as_occupied(self):
         for record in self:
             record.write({'available': False, 'price': record.price + 2000})
+
+    def get_agent_name(self):
+        for record in self:
+            if record.agent_id:
+                record.write({'description': record.agent_id.name})
